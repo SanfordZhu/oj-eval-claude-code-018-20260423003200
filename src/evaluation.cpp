@@ -684,6 +684,17 @@ Value IsString::evalRator(const Value &rand) { // string?
     return BooleanV(rand->v_type == V_STRING);
 }
 
+Value Display::evalRator(const Value &rand) { // display function
+    if (rand->v_type == V_STRING) {
+        String* str_ptr = dynamic_cast<String*>(rand.get());
+        std::cout << str_ptr->s;
+    } else {
+        rand->show(std::cout);
+    }
+
+    return VoidV();
+}
+
 Value Begin::eval(Assoc &e) {
     if (es.empty()) {
         return VoidV();
